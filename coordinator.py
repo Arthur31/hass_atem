@@ -78,6 +78,9 @@ class AtemDataUpdateCoordinator(DataUpdateCoordinator):
         """Async handler for ATEM events."""
         try:
             cmd = params.get('cmd')
+
+            if cmd == "Time":
+                return
             
             # Log pour debug
             _LOGGER.debug(f"Received ATEM event: {cmd} - {params.get('cmdName', '')}")

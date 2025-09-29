@@ -50,9 +50,22 @@ class AtemProgramSensor(CoordinatorEntity, SensorEntity):
     @property
     def native_value(self):
         """Return the state of the sensor."""
-        if self.coordinator.data and "program" in self.coordinator.data:
+        if self.coordinator.data and "program_name" in self.coordinator.data:
+            return self.coordinator.data["program_name"]
+        elif self.coordinator.data and "program" in self.coordinator.data:
             return self.coordinator.data["program"]
         return "Unknown"
+    
+    @property
+    def extra_state_attributes(self):
+        """Return additional attributes."""
+        attrs = {}
+        if self.coordinator.data:
+            if "program" in self.coordinator.data:
+                attrs["input_number"] = self.coordinator.data["program"]
+            if "model" in self.coordinator.data:
+                attrs["atem_model"] = self.coordinator.data["model"]
+        return attrs
 
 
 class AtemPreviewSensor(CoordinatorEntity, SensorEntity):
@@ -75,6 +88,19 @@ class AtemPreviewSensor(CoordinatorEntity, SensorEntity):
     @property
     def native_value(self):
         """Return the state of the sensor."""
-        if self.coordinator.data and "preview" in self.coordinator.data:
+        if self.coordinator.data and "preview_name" in self.coordinator.data:
+            return self.coordinator.data["preview_name"]
+        elif self.coordinator.data and "preview" in self.coordinator.data:
             return self.coordinator.data["preview"]
         return "Unknown"
+    
+    @property
+    def extra_state_attributes(self):
+        """Return additional attributes."""
+        attrs = {}
+        if self.coordinator.data:
+            if "preview" in self.coordinator.data:
+                attrs["input_number"] = self.coordinator.data["preview"]
+            if "available_inputs" in self.coordinator.data:
+                attrs["available_inputs"] = list(self.coordinator.data["available_inputs"].values())
+        return attrs
