@@ -1,0 +1,14 @@
+{
+  "domain": "hass_atem",
+  "name": "Blackmagic ATEM Switcher",
+  "documentation": "https://github.com/Arthur31/hass_atem",
+  "dependencies": [],
+  "codeowners": [
+    "@Arthur31"
+  ],
+  "requirements": ["PyATEMMax"],
+  "version": "0.1.0",
+  "config_flow": true,
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/Arthur31/hass_atem/issues"
+}
